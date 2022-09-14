@@ -1,0 +1,522 @@
+::root {
+  --main-color: #f1c40f;
+  --dark-main-color: #ad8d0d;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Outfit", sans-serif;
+  overflow-x: hidden;
+  background-color: rgb(0, 0, 0);
+  /* background-color: bisque; */
+
+  transition: 0.3s;
+}
+
+.c1600px {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background-color: rgb(245, 245, 245);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--dark-main-color);
+}
+
+/* GRID   GRID   GRID   GRID   GRID */
+
+.grid {
+  margin-top: 30px;
+
+  /* NEW */
+  grid-template-columns: 380px 380px;
+
+  padding: 40px;
+  width: 100vw;
+  justify-content: center;
+
+  display: grid;
+  grid-template-areas: "profile friends" "stats notifications" "search search" "history history";
+  grid-gap: 40px;
+}
+
+.profile-display {
+  grid-area: profile;
+  max-height: 425px;
+}
+.friends-display {
+  grid-area: friends;
+  max-height: 425px;
+}
+.stats-display {
+  grid-area: stats;
+}
+.notifications-display {
+  grid-area: notifications;
+  max-height: 325px;
+}
+.search {
+  grid-area: search;
+  max-height: 800px;
+}
+.history-display {
+  grid-area: history;
+}
+
+/* PROFILE DISPLAY   PROFILE DISPLAY   PROFILE DISPLAY   PROFILE DISPLAY   PROFILE DISPLAY */
+
+.back {
+  position: absolute;
+  top: -30px;
+  left: -30px;
+
+  border-radius: 50%;
+  overflow: visible;
+
+  width: 80px;
+  height: 80px;
+}
+.back img {
+  width: 100%;
+  height: 100%;
+
+  transition: 0.2s;
+}
+.back img:hover {
+  transform: scale(0.9);
+}
+
+.profile-display {
+  position: relative;
+
+  padding: 40px;
+
+  max-width: 380px;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: white;
+}
+
+#profilePicture {
+  width: 200px;
+  height: 200px;
+
+  margin: 0 auto;
+
+  border-radius: 50%;
+  animation: loading 1s linear infinite alternate;
+}
+
+#userName {
+  margin-top: 30px;
+
+  font-size: 32px;
+  font-weight: 800;
+  color: black;
+  text-align: center;
+}
+
+#userReputation {
+  color: #f1c40f;
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* FRIENDS DISPLAY   FRIENDS DISPLAY   FRIENDS DISPLAY   FRIENDS DISPLAY   FRIENDS DISPLAY */
+
+.friends-display {
+  position: relative;
+
+  padding: 20px 30px 30px 30px;
+
+  /* max-width: 380px; */
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: white;
+}
+
+.friends-display-title {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.friends-display ul {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.friends-display li {
+  display: flex;
+
+  position: relative;
+
+  margin-top: 8px;
+  margin-bottom: 7px;
+  padding-right: 10px;
+}
+
+.friendImg {
+  width: 50px;
+  height: 50px;
+
+  margin-right: 20px;
+
+  border-radius: 50%;
+
+  animation: loading 1s linear infinite alternate;
+}
+.friendDetails {
+  text-align: left;
+  margin: auto 0;
+}
+.friendDetails a {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 16px;
+
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+.friendDetails h4 {
+  margin-top: 2px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 13px;
+}
+.friendDetails h4 span {
+  position: absolute;
+  top: 0;
+  left: 35px;
+}
+#active-friends {
+  color: #f1c40f;
+}
+
+/* SEARCH   SEARCH   SEARCH   SEARCH   SEARCH */
+
+.search {
+  position: relative;
+
+  padding: 20px;
+
+  text-align: left;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: white;
+}
+
+.searchBar {
+  display: flex;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#searchIcon {
+  width: 50px;
+  height: 50px;
+
+  margin-right: 15px;
+}
+
+#searchInput {
+  height: 48px;
+  width: 100%;
+
+  color: black;
+  font-weight: 300;
+  font-size: 30px;
+
+  border-radius: 0;
+  border: none;
+  border-bottom: 3px solid #f1c40f;
+}
+#searchInput::placeholder {
+  color: rgb(240, 240, 240);
+}
+
+#search-result {
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.playerResult {
+  display: flex;
+  text-align: left;
+  margin-top: 15px;
+}
+#searchPic {
+  width: 50px;
+  height: 50px;
+
+  border-radius: 50%;
+}
+.playerResult a {
+  margin: auto 0 auto 7.5px;
+  padding: 2.5px 5px;
+  font-weight: 800;
+  font-size: 24px;
+
+  color: rgb(21, 36, 100);
+}
+.playerResult p {
+  margin: auto 0;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+/* HISTORY DISPLAY   HISTORY DISPLAY   HISTORY DISPLAY   HISTORY DISPLAY   HISTORY DISPLAY */
+
+.history-display {
+  position: relative;
+
+  padding: 40px;
+
+  height: 500px;
+  text-align: left;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: white;
+}
+
+/* STATS DISPLAY   STATS DISPLAY   STATS DISPLAY   STATS DISPLAY   STATS DISPLAY */
+
+.stats-display {
+  position: relative;
+
+  padding: 20px 30px 30px 30px;
+
+  text-align: left;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: white;
+}
+
+.stats-display-title {
+  text-align: left;
+  margin-bottom: 10px;
+
+  min-width: 270px;
+}
+
+.stats-display ul {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.stats-display li {
+  display: flex;
+
+  position: relative;
+
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-right: 10px;
+}
+
+.important-stat {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+#stats-level {
+  color: #f1c40f;
+  font-weight: 700;
+}
+
+/* NOTIFICAITON DISPLAY   NOTIFICAITON DISPLAY   NOTIFICAITON DISPLAY   NOTIFICAITON DISPLAY   NOTIFICAITON DISPLAY */
+
+.notifications-display {
+  position: relative;
+
+  padding: 20px 30px 30px 30px;
+
+  text-align: left;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: white;
+}
+
+.notifications-display ul {
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  padding-right: 5px;
+  padding-top: 10px;
+}
+
+.notifications-display li {
+  display: flex;
+
+  position: relative;
+
+  padding-bottom: 15px;
+}
+
+.notifications-display img {
+  width: 50px;
+  height: 50px;
+
+  margin: auto 15px auto 0;
+
+  border-radius: 50%;
+
+  animation: loading 1s linear infinite alternate;
+}
+
+#accept-not {
+  border: none;
+  background-color: #f1c40f;
+
+  font-size: 13px;
+  font-weight: 600;
+  color: black;
+
+  padding: 4px 10px;
+  cursor: pointer;
+
+  margin-right: 10px;
+}
+
+#decline-not {
+  border: 2px solid #f1c40f;
+  background-color: transparent;
+
+  font-size: 13px;
+  font-weight: 600;
+  color: black;
+
+  padding: 2px 10px;
+  cursor: pointer;
+  margin-bottom: 2px;
+}
+
+#notification-title {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 800;
+}
+#notification-content {
+  font-size: 16px;
+  margin-bottom: 7px;
+  font-weight: 500;
+}
+
+/* ANIMATIONS   ANIMATIONS   ANIMATIONS   ANIMATIONS   ANIMATIONS */
+
+@keyframes loading {
+  0% {
+    background-color: hsl(200, 20%, 70%);
+  }
+
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
+}
+
+/* MEDIA   MEDIA   MEDIA   MEDIA   MEDIA */
+
+@media (max-width: 900px) {
+  .grid {
+    margin-top: 0;
+
+    display: grid;
+    padding: 30px;
+
+    /* NEW */
+    grid-template-columns: 380px;
+
+    grid-template-areas:
+      "profile"
+      "stats"
+      "friends"
+      "notifications"
+      "search"
+      "history"
+      "games";
+    grid-gap: 30px;
+  }
+  .el {
+    max-width: 400px;
+  }
+  .friends-display {
+    padding: 20px;
+  }
+  .history-display {
+    padding: 20px;
+  }
+  .stats-display {
+    padding: 20px;
+  }
+  .notifications-display {
+    padding: 20px;
+  }
+  #searchIcon {
+    width: 36px;
+    height: 36px;
+  }
+  #searchInput {
+    height: 36px;
+  }
+  #searchPic {
+    width: 36px;
+    height: 36px;
+  }
+  .back {
+    top: -20px;
+    left: -20px;
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 400px) {
+  .grid {
+    padding: 20px;
+
+    /* NEW */
+    grid-template-columns: 100%;
+
+    grid-gap: 20px;
+  }
+  .back {
+    top: -15px;
+    left: -10px;
+  }
+}

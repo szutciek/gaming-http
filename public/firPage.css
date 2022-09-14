@@ -1,0 +1,312 @@
+::root {
+  --main-color: #f1c40f;
+  --dark-main-color: #ad8d0d;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Outfit", sans-serif;
+  overflow-x: hidden;
+  background-image: linear-gradient(#ff5555 50%, #5555ff 50%);
+  background-color: #ff5555;
+
+  transition: 0.3s;
+}
+
+.c1600px {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background-color: rgb(245, 245, 245);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--dark-main-color);
+}
+
+/* WAITING SCREEN ---------------------------------------------------------------------------- */
+
+#waitingScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  z-index: 20;
+
+  background-image: url("../svg/sparing.svg");
+  background-position: center;
+  background-size: cover;
+
+  animation: intro;
+  animation-fill-mode: forwards;
+  animation-delay: 4s;
+  animation-timing-function: ease-in-out;
+  animation-duration: 1s;
+}
+.host {
+  position: absolute;
+  left: 8%;
+  top: 8%;
+
+  display: flex;
+  flex-direction: row;
+}
+.guest {
+  position: absolute;
+  right: 8%;
+  bottom: 8%;
+
+  display: flex;
+  flex-direction: row;
+}
+.data {
+  display: flex;
+  flex-direction: column;
+}
+.host img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+
+  margin-right: 30px;
+  animation: loading 1s linear infinite alternate;
+}
+.guest img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+
+  margin-left: 30px;
+  animation: loading 1s linear infinite alternate;
+}
+.host .dataRep {
+  font-size: 30px;
+  color: #ffffff;
+}
+.host h1 {
+  font-size: 60px;
+  font-weight: 900;
+  color: black;
+}
+.guest .dataRep {
+  font-size: 30px;
+  color: #000000;
+}
+.guest h1 {
+  font-size: 60px;
+  font-weight: 900;
+  color: white;
+}
+
+/* PLAYING SCREEN ---------------------------------------------------------------------------- */
+
+#playScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  z-index: 10;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.grid {
+  border-bottom: 10px solid #f1c410;
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  display: grid;
+  grid-template-columns: repeat(7, 10vmin);
+  border-radius: 10px;
+  grid-gap: 10px;
+  padding: 10px;
+}
+
+.el {
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  width: 10vmin;
+  height: 10vmin;
+  border-radius: 50%;
+  transition: 0.1s;
+}
+
+.el:hover {
+  background-color: rgba(94, 94, 94, 0.7);
+  transform: scale(0.95);
+}
+
+.host2 {
+  display: flex;
+  flex-direction: row;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.2s;
+}
+.guest2 {
+  display: flex;
+  flex-direction: row;
+  transition: 0.2s;
+}
+
+.host2 img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+
+  margin-right: 30px;
+}
+.guest2 img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+
+  margin-left: 30px;
+}
+.host2 .dataRep {
+  font-size: 20px;
+  color: #ffffff;
+}
+.host2 h1 {
+  font-size: 40px;
+  font-weight: 900;
+  color: black;
+}
+.guest2 .dataRep {
+  font-size: 20px;
+  color: #ffffff;
+}
+.guest2 h1 {
+  font-size: 40px;
+  font-weight: 900;
+  color: rgb(0, 0, 0);
+}
+
+/* ANIMATIONS -------------------------------------------------------------------------------------- */
+
+@keyframes loading {
+  0% {
+    background-color: hsl(200, 20%, 70%);
+  }
+
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
+}
+
+@keyframes intro {
+  0% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(66%);
+  }
+}
+
+/* MEDIA QUERIES -------------------------------------------------------------------------------------- */
+
+@media (max-width: 700px) {
+  /* LOADING SCREEN ---------------------------------------------------------------------------- */
+
+  .host img {
+    width: 80px;
+    height: 80px;
+
+    margin-right: 20px;
+  }
+  .guest img {
+    width: 80px;
+    height: 80px;
+
+    margin-left: 20px;
+  }
+  .host h1 {
+    font-size: 30px;
+  }
+  .guest h1 {
+    font-size: 30px;
+  }
+  .host .dataRep {
+    font-size: 16px;
+    color: #ffffff;
+  }
+  .guest .dataRep {
+    font-size: 16px;
+    color: #000000;
+  }
+
+  /* PLAYING SCREEN ---------------------------------------------------------------------------- */
+
+  #playScreen {
+    flex-direction: column;
+  }
+
+  .host2 {
+    display: flex;
+    flex-direction: row;
+  }
+  .guest2 {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .host2 img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+
+    margin-right: 30px;
+    animation: loading 1s linear infinite alternate;
+  }
+  .guest2 img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+
+    margin-left: 30px;
+    animation: loading 1s linear infinite alternate;
+  }
+  .host2 .dataRep {
+    font-size: 15px;
+    color: #ffffff;
+  }
+  .host2 h1 {
+    font-size: 25px;
+    font-weight: 900;
+    color: black;
+  }
+  .guest2 .dataRep {
+    font-size: 15px;
+    color: #ffffff;
+  }
+  .guest2 h1 {
+    font-size: 25px;
+    font-weight: 900;
+    color: rgb(0, 0, 0);
+  }
+}

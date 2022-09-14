@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <title>Create Account - Kanapka Studios</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Outfit", sans-serif;
+      }
+      body {
+        background-color: rgb(255, 255, 255);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        padding: 60px 0;
+        min-height: 100vh;
+        min-width: 380px;
+
+        overflow-x: hidden;
+        overflow-y: auto;
+        transition: 1s;
+      }
+      ::-webkit-scrollbar {
+        width: 3px;
+        height: 3px;
+      }
+      ::-webkit-scrollbar-track {
+        background-color: rgb(245, 245, 245);
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: rgb(206, 206, 206);
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: rgb(173, 173, 173);
+      }
+      .center {
+        position: relative;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        width: 380px;
+        overflow: hidden;
+
+        animation: load;
+        animation-duration: 0.3s;
+
+        background-color: rgb(255, 255, 255);
+      }
+      .screen1,
+      .screen2,
+      .screen3 {
+        width: 300px;
+        height: 500px;
+
+        transition: 0.2s;
+
+        margin: 40px;
+      }
+      #profile {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin-bottom: 50px;
+        margin-top: 20px;
+        background-color: rgb(241, 241, 241);
+      }
+      #profilePicUser {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin-bottom: 50px;
+        margin-top: 20px;
+        background-color: rgb(241, 241, 241);
+
+        animation: loading 1s linear infinite alternate;
+      }
+      .form {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        text-align: left;
+      }
+      label {
+        font-size: 18px;
+        font-weight: 300;
+
+        margin-bottom: 5px;
+      }
+      label span {
+        font-size: 20px;
+        font-weight: 500;
+      }
+      input {
+        min-width: 250px;
+
+        border: none;
+        font-size: 24px;
+        border-bottom: 2px solid #f1c40f;
+        border-radius: 0;
+
+        margin-bottom: 15px;
+      }
+      input:last-of-type {
+        margin-bottom: 5px;
+      }
+      input::placeholder {
+        font-size: 24px;
+        font-weight: 200;
+        color: rgb(219, 219, 219);
+      }
+      .options {
+        display: flex;
+        justify-content: space-between;
+      }
+      a {
+        font-size: 13px;
+        color: rgb(133, 133, 204);
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 7.5px;
+        padding: 10px 10px 0 10px;
+        width: 300px;
+        height: 380px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+      #choosePic {
+        margin-bottom: 40px;
+        margin-top: 10px;
+      }
+      .profilePic {
+        width: 85px;
+        height: 85px;
+        border-radius: 50%;
+
+        animation: loading 1s linear infinite alternate;
+
+        transition: 0.2s;
+        cursor: pointer;
+      }
+      .profilePic:hover,
+      .specialProfilePic:hover {
+        transform: scale(1.1);
+      }
+      .specialProfilePic {
+        border: 2px solid rgb(255, 236, 61);
+      }
+      .container3 {
+        width: 300px;
+      }
+      .container3 h1,
+      .container3 h2 {
+        overflow-x: auto;
+      }
+
+      button {
+        border-radius: 0;
+
+        border: 2px solid #f1c40f;
+        background-color: white;
+        color: black;
+        font-size: 20px;
+        font-weight: 600;
+        width: 10rem;
+        padding: 5px;
+        margin: 25px auto 0 auto;
+        cursor: pointer;
+      }
+      .btn-full {
+        border-radius: 0;
+        border: none;
+        background-color: #f1c40f;
+        color: black;
+        font-size: 20px;
+        font-weight: 600;
+        width: 10rem;
+        padding: 5px;
+        margin: 0 auto;
+        cursor: pointer;
+      }
+      .btn-empty {
+        margin: 10px auto 0 auto;
+      }
+      #userName {
+        font-weight: 800;
+      }
+      #userEmail {
+        margin-top: 10px;
+        font-weight: 300;
+      }
+      #responses {
+        margin-top: 50px;
+        margin-bottom: 50px;
+        width: 100%;
+        height: 1rem;
+      }
+
+      .redirect {
+        position: absolute;
+
+        width: 290px;
+        height: 100px;
+
+        display: flex;
+
+        background-image: linear-gradient(
+          90deg,
+          rgb(34, 34, 255) 50%,
+          rgb(39, 151, 39) 50%
+        );
+        background-size: 580px 140px;
+        background-position: left;
+
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.2s;
+
+        z-index: 999;
+      }
+      .redirect h1 {
+        text-align: center;
+        margin: auto;
+        font-size: 30px;
+
+        color: white;
+      }
+      .redirect h1 span {
+        margin: auto;
+        color: #f1c40f;
+      }
+
+      @keyframes load {
+        from {
+          transform: translateY(30px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0px);
+          opacity: 1;
+        }
+      }
+
+      @keyframes loading {
+        0% {
+          background-color: hsl(200, 20%, 70%);
+        }
+
+        100% {
+          background-color: hsl(200, 20%, 95%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="redirect">
+      <h1>Taking you to the <span></span></h1>
+    </div>
+    <div class="center">
+      <div id="screen" class="screen1">
+        <img id="profile" src="user.png" />
+        <div class="form">
+          <label><span>U</span>sername</label>
+          <input id="name" placeholder="Destroyer3000" />
+          <label><span>E</span>mail</label>
+          <input type="email" id="email" placeholder="you@email.com" />
+          <label><span>P</span>assword</label>
+          <input type="password" id="password" placeholder="Password123" />
+          <a href="/log-in">Log in</a>
+          <button id="progressBtn">Next Step</button>
+        </div>
+      </div>
+      <div id="screen" class="screen2">
+        <h1 id="choosePic">Select your profile picture</h1>
+        <div class="grid">
+          <img class="profilePic" id="progressBtn" src="user.png" />
+          <img class="profilePic" id="progressBtn" src="user.png" />
+          <img class="profilePic" id="progressBtn" src="user.png" />
+        </div>
+      </div>
+      <div id="screen" class="screen3">
+        <div class="container3">
+          <img id="profilePicUser" />
+          <h1 id="userName"></h1>
+          <h2 id="userEmail"></h2>
+          <p id="responses"></p>
+          <button id="submitBtn" class="btn-full">Create</button>
+          <button id="regressBtn" class="btn-empty">Edit</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/srf.js"></script>
+
+    <script>
+      const responses = document.getElementById("responses");
+      const submitBtn = document.getElementById("submitBtn");
+
+      const profileGrid = document.querySelector(".grid");
+      const userEmail = document.getElementById("userEmail");
+      const userName = document.getElementById("userName");
+      const profilePicUser = document.getElementById("profilePicUser");
+
+      const nameField = document.getElementById("name");
+      const emailField = document.getElementById("email");
+      const passwordField = document.getElementById("password");
+
+      const redirect = document.querySelector(".redirect");
+      const redirectLink = document.querySelector(".redirect span");
+
+      const progressBtn = document.querySelectorAll("#progressBtn");
+      const regressBtn = document.querySelectorAll("#regressBtn");
+      const screen1 = document.querySelector(".screen1");
+      const screen2 = document.querySelector(".screen2");
+      const screen3 = document.querySelector(".screen3");
+      let currentScreen = 1;
+
+      // -------------------------------------------------------------------------------------------------------------------------------------------
+
+      const nextScreen = () => {
+        if (
+          currentScreen <= 3 &&
+          nameField.value &&
+          emailField.value &&
+          passwordField.value
+        ) {
+          screen1.style.transform = `translateX(-${
+            currentScreen * (screen1.getBoundingClientRect().width + 80)
+          }px)`;
+          screen2.style.transform = `translateX(-${
+            currentScreen * (screen2.getBoundingClientRect().width + 80)
+          }px)`;
+          screen3.style.transform = `translateX(-${
+            currentScreen * (screen3.getBoundingClientRect().width + 80)
+          }px)`;
+          currentScreen++;
+        }
+      };
+      const lastScreen = () => {
+        screen1.style.transform = "translateX(0)";
+        screen2.style.transform = "translateX(0)";
+        screen3.style.transform = "translateX(0)";
+        currentScreen = 1;
+      };
+      progressBtn.forEach((el) =>
+        el.addEventListener("click", () => {
+          user.name = nameField.value;
+          user.email = emailField.value;
+          user.password = passwordField.value;
+          nextScreen();
+        })
+      );
+      regressBtn.forEach((el) =>
+        el.addEventListener("click", () => {
+          lastScreen();
+        })
+      );
+
+      // -------------------------------------------------------------------------------------------------------------------------------------------
+
+      let user = {
+        name: "",
+        email: "",
+        password: "",
+        profile: "",
+      };
+
+      const setProfilePics = () => {
+        profileGrid.innerHTML = "";
+        const req = new XMLHttpRequest();
+        req.open("get", `/api/all-profiles`);
+        req.setRequestHeader("Accept", "application/json");
+        req.setRequestHeader("Content-Type", "application/json");
+        req.send();
+
+        req.onload = (res) => {
+          const images = JSON.parse(res.currentTarget.response).data;
+          profileGrid.innerHTML = "";
+          images.forEach((el, i) => {
+            profileGrid.insertAdjacentHTML(
+              "beforeend",
+              `<img
+            class="${
+              el[0] == "1" ? "profilePic specialProfilePic" : "profilePic"
+            }"
+            id="profile-pic-${i}"
+            src="/profiles/${el}"
+          />`
+            );
+          });
+          document.querySelectorAll(".profilePic").forEach((img, i) => {
+            img.addEventListener("click", () => {
+              user.profile = Object.values(images)[i];
+              profilePicUser.src = `/profiles/${user.profile}`;
+              userEmail.innerText = user.email;
+              userName.innerText = user.name;
+              nextScreen();
+            });
+          });
+        };
+      };
+      setProfilePics();
+
+      const transferAnimation = () => {
+        redirectLink.innerText = "login page";
+        redirect.style.opacity = 1;
+        redirect.style.pointerEvents = "auto";
+
+        setTimeout(() => {
+          redirect.style.transition = "2.8s cubic-bezier(0.17, 0.63, 0.09, 1)";
+          redirect.style.backgroundPosition = "right";
+        }, 500);
+      };
+
+      submitBtn.addEventListener("click", () => {
+        const req = new XMLHttpRequest();
+        req.open("POST", "/api/create-account");
+        req.setRequestHeader("Accept", "application/json");
+        req.setRequestHeader("Content-Type", "application/json");
+        const data = {
+          ...user,
+        };
+        const request = JSON.stringify(data);
+        req.send(request);
+
+        req.onload = (res) => {
+          let serverMessage = JSON.parse(res.currentTarget.response).message;
+          responses.innerText = serverMessage;
+          displayMessage(serverMessage);
+
+          if (serverMessage === "Account created") {
+            setTimeout(() => {
+              transferAnimation();
+              setTimeout(() => {
+                window.location = "/log-in";
+              }, 3000);
+            }, 1000);
+          }
+        };
+      });
+
+      // -------------------------------------------------------------------------------------------------------------------------------------------
+
+      const colors = [
+        "rgb(240, 170, 170)",
+        "rgb(170, 240, 170)",
+        "rgb(170, 170, 240)",
+      ];
+      let ci = 1;
+      setInterval(() => {
+        document.querySelector("body").style.backgroundColor = colors[ci];
+        ci++;
+        if (ci > colors.length - 1) {
+          ci = 0;
+        }
+      }, 2000);
+    </script>
+  </body>
+</html>

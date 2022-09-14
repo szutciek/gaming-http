@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <title>Kanapka Studios</title>
+    <link rel="stylesheet" href="panel.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" name="icon" href="favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      if (!document.cookie) window.location = "/home";
+    </script>
+  </head>
+  <body>
+    <div class="grid">
+      <div class="el profile-display">
+        <a class="back" href="/home"><img src="/svg/home.svg" /></a>
+        <img id="profilePicture" />
+        <h1 id="userName">Username</h1>
+        <h3 id="userReputation">Reputation</h3>
+      </div>
+      <div class="el friends-display">
+        <h1 class="friends-display-title">
+          Friends - <span id="active-friends"></span> online:
+        </h1>
+        <ul id="friendList"></ul>
+      </div>
+      <div class="el search">
+        <h1>Search for users:<span id="searchTitleField"></span></h1>
+        <div class="searchBar">
+          <img id="searchIcon" src="/svg/search.svg" />
+          <input id="searchInput" onkeypress="performUserQuery()" />
+        </div>
+        <div id="search-result"></div>
+      </div>
+      <div class="el history-display">
+        <h1>Your match history:</h1>
+      </div>
+      <div class="el stats-display">
+        <h1 class="stats-display-title">Statistics:</h1>
+        <ul id="statList">
+          <li class="important-stat">
+            Level:&nbsp;<span id="stats-level"></span>
+          </li>
+          <li>Wins:&nbsp;<span id="stats-wins"></span></li>
+          <li>Games played:&nbsp;<span id="stats-games-played"></span></li>
+          <li>Time played:&nbsp;<span id="stats-time-played"></span></li>
+        </ul>
+      </div>
+      <div class="el notifications-display">
+        <h1>Notifications:</h1>
+        <ul id="notificationsList"></ul>
+      </div>
+    </div>
+
+    <script src="/srf.js" defer></script>
+    <script src="/panel.js" defer></script>
+
+    <!-- ------------------- -->
+    <!-- BASIC FUNCTIONALITY -->
+    <!-- ------------------- -->
+
+    <script>
+      const colors = [
+        "rgb(240, 170, 170)",
+        "rgb(170, 240, 170)",
+        "rgb(170, 170, 240)",
+      ];
+      let ci = 1;
+      setInterval(() => {
+        document.querySelector("body").style.backgroundColor = colors[ci];
+        ci++;
+        if (ci > colors.length - 1) {
+          ci = 0;
+        }
+      }, 2000);
+    </script>
+
+    <!-- --------------- -->
+    <!-- SEARCING SCRIPT -->
+    <!-- --------------- -->
+
+    <script>
+      const searchField = document.getElementById("searchInput");
+      const searchTitleField = document.getElementById("searchTitleField");
+      const searchResultField = document.getElementById("search-result");
+      const performUserQuery = () => {
+        const query = searchField.value;
+        const search = new XMLHttpRequest();
+        search.open("get", `./api/search-users/${query}`);
+        search.setRequestHeader("Accept", "application/json");
+        search.setRequestHeader("Content-Type", "application/json");
+        search.send();
+
+        search.onload = () => {
+          searchResultField.innerHTML = "";
+          results = JSON.parse(search.response);
+
+          results.forEach((el) => {
+            if (el) {
+              searchResultField.insertAdjacentHTML(
+                "beforeend",
+                `<div class="playerResult">
+            <img id="searchPic" src="profiles/${el.profile}" />
+            <a href="../${el.name}">${el.name}</a><p> - visit profile</p>
+          </div>`
+              );
+            }
+          });
+        };
+      };
+    </script>
+  </body>
+</html>

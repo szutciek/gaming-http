@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Four in a Row</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-image: radial-gradient(
+          at top left,
+          rgb(82, 82, 82),
+          rgb(44, 44, 44)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 100vh;
+        font-family: "M PLUS 1", sans-serif;
+      }
+      h1 {
+        color: rgb(182, 182, 182);
+        margin-bottom: 10px;
+        font-size: 40px;
+      }
+      #playerNameH2 {
+        color: rgb(182, 182, 182);
+        margin-bottom: 5px;
+        font-size: 14px;
+      }
+      .grid {
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(50px);
+        -webkit-backdrop-filter: blur(50px);
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-gap: 10px;
+        padding: 10px;
+        border-radius: 20px;
+      }
+      .el {
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(50px);
+        -webkit-backdrop-filter: blur(50px);
+        width: 11vmin;
+        height: 11vmin;
+        border-radius: 50%;
+        transition: 0.1s;
+      }
+      .el:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+        transform: scale(0.95);
+      }
+      .actionMenu {
+        display: flex;
+      }
+      .actionMenu a {
+        line-height: 20px;
+        font-size: 20px;
+        margin-left: 10px;
+        margin-bottom: 15px;
+        color: white;
+        text-decoration: none;
+      }
+      .actionMenu h5 {
+        padding-right: 10px;
+        border-right: 1px solid rgb(170, 170, 170);
+
+        line-height: 20px;
+        font-size: 20px;
+        font-weight: 500;
+        margin-left: 10px;
+        margin-bottom: 15px;
+        color: white;
+        cursor: pointer;
+      }
+      .cOverlay {
+        position: fixed;
+        width: 100vw;
+        height: 110vh;
+        z-index: 998;
+
+        background-color: rgba(0, 0, 0, 0.33);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+      }
+      .wOverlay {
+        position: fixed;
+        width: 100vw;
+        height: 110vh;
+        z-index: 998;
+
+        background-color: rgba(0, 0, 0, 0.33);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+      }
+      .cookieInfo {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        min-width: 300px;
+
+        border-radius: 10px;
+        padding: 30px;
+
+        background-color: rgba(255, 255, 255, 0.66);
+        backdrop-filter: blur(50px);
+        -webkit-backdrop-filter: blur(50px);
+      }
+      .cookieInfo h2 {
+        margin-bottom: 30px;
+      }
+      .cookieInfo h3 {
+        margin-bottom: 30px;
+      }
+      .cookieInfo input {
+        margin: 0 auto;
+        width: 100%;
+        height: 40px;
+        text-align: center;
+        border: none;
+
+        background-color: rgba(126, 126, 126, 0.5);
+        backdrop-filter: blur(50px);
+        -webkit-backdrop-filter: blur(50px);
+
+        color: black;
+        font-size: 20px;
+      }
+      .cookieInfo button {
+        position: absolute;
+        bottom: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        width: 50%;
+        height: 50px;
+        font-size: 20px;
+
+        background-color: rgb(20, 145, 47);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        transition: 0.2s;
+      }
+      .cookieInfo button:hover {
+        background-color: rgb(27, 126, 48);
+        transform: translateX(-50%) scale(1.05);
+      }
+      .cookieInfo img {
+        position: absolute;
+        top: -40px;
+        left: -40px;
+
+        width: 90px;
+        height: 90px;
+      }
+      .winScreen {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+
+        border-radius: 10px;
+        padding: 30px;
+
+        background-color: rgba(255, 255, 255, 0.66);
+        backdrop-filter: blur(50px);
+        -webkit-backdrop-filter: blur(50px);
+      }
+      .winScreen button {
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        height: 40px;
+        padding: 0 15px 0 15px;
+
+        color: white;
+        font-size: 15px;
+
+        background-color: rgb(199, 173, 57);
+        border: none;
+        border-radius: 5px;
+        transition: 0.2s;
+      }
+      .winScreen button:hover {
+        transform: translateX(-50%) scale(1.05);
+        background-color: rgb(173, 150, 46);
+      }
+      .hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@200;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <h1></h1>
+    <h2 id="playerNameH2"></h2>
+    <div class="actionMenu">
+      <h5 id="changeNameBtn">Change Name</h5>
+      <h5 id="resetBtn">Reset</h5>
+      <a href="/fir/create">New Game</a>
+    </div>
+    <div class="winScreen hidden">
+      <h1 id="winIcon"></h1>
+      <h2 id="winText">You won</h2>
+      <p id="winMotivation">Wow.</p>
+      <button id="rematchBtn">Rematch</button>
+      <button id="rematchAsk">:/ wait</button>
+    </div>
+    <div class="cOverlay hidden"></div>
+    <div class="wOverlay hidden"></div>
+    <div class="cookieInfo hidden">
+      <img src="/cookie.png" />
+      <h2>This website uses <br />COOKIES<br />without your consent</h2>
+      <h3>Don't bother calling<br />THE EU.<br />Deal with it</h3>
+      <input id="playerNameInput" placeholder="Enter your nick" />
+      <button id="playerSButton">Hell yea</button>
+    </div>
+    <div class="grid">
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+      <div class="el"></div>
+    </div>
+    <h6 style="position: absolute; bottom: 0"></h6>
+    <script>
+      const resetBtn = document.getElementById("resetBtn");
+      const changeNameBtn = document.getElementById("changeNameBtn");
+
+      const playerSButton = document.getElementById("playerSButton");
+      const playerNameInput = document.getElementById("playerNameInput");
+
+      const cookieField = document.querySelector(".cookieInfo");
+      const cOverlay = document.querySelector(".cOverlay");
+
+      const wOverlay = document.querySelector(".wOverlay");
+      const winText = document.getElementById("winText");
+      const winIcon = document.getElementById("winIcon");
+      const winMotivation = document.getElementById("winMotivation");
+
+      const winScreen = document.querySelector(".winScreen");
+      const rematchBtn = document.getElementById("rematchBtn");
+      const rematchAsk = document.getElementById("rematchAsk");
+
+      let player = document.cookie.split("=")[1];
+
+      const readPlayerName = () => {
+        player = playerNameInput.value;
+        document.cookie = `player=${player}`;
+        document.querySelector("h1").innerText = player;
+
+        cookieField.classList.add("hidden");
+        cOverlay.classList.add("hidden");
+      };
+
+      if (!player) {
+        cookieField.classList.remove("hidden");
+        cOverlay.classList.remove("hidden");
+        playerSButton.addEventListener("click", readPlayerName);
+      } else {
+        document.querySelector("h1").innerText = player;
+      }
+
+      const showWinner = (winner, host, guest) => {
+        if (player === host) {
+          rematchBtn.classList.remove("hidden");
+          rematchAsk.classList.add("hidden");
+        } else {
+          rematchBtn.classList.add("hidden");
+          rematchAsk.classList.remove("hidden");
+        }
+
+        winScreen.classList.remove("hidden");
+        wOverlay.classList.remove("hidden");
+
+        if (player === host || player === guest) {
+          winIcon.innerText = winner === player ? "🏆" : "❌";
+          winText.innerText = winner === player ? "You won" : "You lost";
+          winMotivation.innerText = winner === player ? "Wow." : "xD";
+        } else {
+          winIcon.innerText = "🍿";
+          winText.innerText = `${winner} won`;
+          winMotivation.innerText = "Spectacular.";
+        }
+      };
+
+      const url = window.location.pathname;
+      const room = url.split("/")[2];
+      const fields = document.querySelectorAll(".el");
+      const col = [];
+      col[1] = [
+        fields[0],
+        fields[7],
+        fields[14],
+        fields[21],
+        fields[28],
+        fields[35],
+      ];
+      col[2] = [
+        fields[1],
+        fields[8],
+        fields[15],
+        fields[22],
+        fields[29],
+        fields[36],
+      ];
+      col[3] = [
+        fields[2],
+        fields[9],
+        fields[16],
+        fields[23],
+        fields[30],
+        fields[37],
+      ];
+      col[4] = [
+        fields[3],
+        fields[10],
+        fields[17],
+        fields[24],
+        fields[31],
+        fields[38],
+      ];
+      col[5] = [
+        fields[4],
+        fields[11],
+        fields[18],
+        fields[25],
+        fields[32],
+        fields[39],
+      ];
+      col[6] = [
+        fields[5],
+        fields[12],
+        fields[19],
+        fields[26],
+        fields[33],
+        fields[40],
+      ];
+      col[7] = [
+        fields[6],
+        fields[13],
+        fields[20],
+        fields[27],
+        fields[34],
+        fields[41],
+      ];
+
+      const sendMove = (move) => {
+        let req = new XMLHttpRequest();
+        req.open("POST", `/fir/${room}`);
+        req.setRequestHeader("Accept", "application/json");
+        req.setRequestHeader("Content-Type", "application/json");
+        const data = {
+          field: move,
+          player: player,
+        };
+        const request = JSON.stringify(data);
+        req.send(request);
+
+        req.onload = (res) => {};
+      };
+      const refresh = () => {
+        let req = new XMLHttpRequest();
+        req.open("get", `/fir/refresh/${room}`);
+        req.setRequestHeader("Accept", "application/json");
+        req.setRequestHeader("Content-Type", "application/json");
+        req.send();
+
+        req.onload = (res) => {
+          const filledFields = JSON.parse(res.currentTarget.response);
+          let fill = {};
+          fill = filledFields.data;
+          if (!fill) {
+            const servMes = JSON.parse(res.currentTarget.response).message;
+            const servStat = JSON.parse(res.currentTarget.response).status;
+            document.querySelector("h6").innerText = servMes || "Syncing game";
+            if (servStat === 0) {
+              fields.forEach(
+                (fl) => (fl.style.backgroundColor = "rgba(255, 255, 255, 0.1)")
+              ); // Remove if problems
+            }
+            return;
+          } else {
+            Object.keys(fill).forEach((el) => {
+              if (fill[el] == filledFields.host) {
+                col[String(el)[0]][String(el)[1]].style.backgroundColor = "red";
+              } else if (fill[el] == filledFields.guest) {
+                col[String(el)[0]][String(el)[1]].style.backgroundColor =
+                  "blue";
+              } else if (fill[el] != " ") {
+                col[String(el)[0]][String(el)[1]].style.backgroundColor = "red";
+              } else {
+                col[String(el)[0]][String(el)[1]].style.backgroundColor =
+                  "rgba(255, 255, 255, 0.1)";
+              }
+            });
+          }
+          if (filledFields.winner) {
+            showWinner(
+              filledFields.winner,
+              filledFields.host,
+              filledFields.guest
+            );
+          } else {
+            winScreen.classList.add("hidden");
+            wOverlay.classList.add("hidden");
+          }
+          if (filledFields.host) {
+            document.querySelector(
+              "h1"
+            ).innerHTML = `<span style="color: red;">${filledFields.host}</span> VS <span style="color: blue">${filledFields.guest}</span>`;
+            document.querySelector("h2").innerHTML = player;
+          }
+        };
+      };
+
+      const reset = () => {
+        let req = new XMLHttpRequest();
+        req.open("POST", `/fir/reset/${room}`);
+        req.setRequestHeader("Accept", "application/json");
+        req.setRequestHeader("Content-Type", "application/json");
+        const data = JSON.stringify({ player: player });
+        req.send(data);
+
+        req.onload = (res) => {
+          const filledFields = JSON.parse(res.currentTarget.response).data;
+          if (filledFields) {
+            Object.keys(filledFields).forEach((el) => {
+              col[String(el)[0]][String(el)[1]].style.backgroundColor =
+                "rgba(255, 255, 255, 0.1)";
+            });
+          }
+        };
+      };
+
+      setInterval(() => refresh(), 600);
+
+      col[1].forEach((el, i) => {
+        el.addEventListener("click", () => sendMove(Number("1" + i)));
+      });
+      col[2].forEach((el, i) => {
+        el.addEventListener("click", () => sendMove(Number("2" + i)));
+      });
+      col[3].forEach((el, i) => {
+        el.addEventListener("click", () => sendMove(Number("3" + i)));
+      });
+      col[4].forEach((el, i) => {
+        el.addEventListener("click", () => sendMove(Number("4" + i)));
+      });
+      col[5].forEach((el, i) => {
+        el.addEventListener("click", () => sendMove(Number("5" + i)));
+      });
+      col[6].forEach((el, i) => {
+        el.addEventListener("click", () => sendMove(Number("6" + i)));
+      });
+      col[7].forEach((el, i) => {
+        el.addEventListener("click", () => sendMove(Number("7" + i)));
+      });
+
+      resetBtn.addEventListener("click", reset);
+      rematchBtn.addEventListener("click", () => {
+        reset();
+        winScreen.classList.add("hidden");
+        wOverlay.classList.add("hidden");
+      });
+      changeNameBtn.addEventListener("click", () => {
+        playerNameInput.value = "";
+        cookieField.classList.remove("hidden");
+        cOverlay.classList.remove("hidden");
+        playerSButton.addEventListener("click", readPlayerName);
+      });
+      rematchAsk.addEventListener("click", () => {
+        wOverlay.classList.add("hidden");
+        winScreen.classList.add("hidden");
+        sawWinner = 1;
+      });
+    </script>
+  </body>
+</html>

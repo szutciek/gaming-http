@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <title>Kanapka Studios</title>
+    <link rel="stylesheet" href="/userPanel.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" name="icon" href="/favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="grid">
+      <div class="el profile-display">
+        <a class="back" href="../panel"><img src="/svg/back.svg" /></a>
+        <img id="profilePicture" />
+        <h1 id="userName">...</h1>
+        <h2 id="userStatus">...</h2>
+      </div>
+      <div class="el stats-display">
+        <h1 class="stats-display-title">Statistics:</h1>
+        <ul id="statList">
+          <li class="important-stat">
+            Reputation:&nbsp;<span id="stats-rep"></span>
+          </li>
+          <li>Wins:&nbsp;<span id="stats-wins"></span></li>
+          <li>Games played:&nbsp;<span id="stats-games-played"></span></li>
+          <li>Time played:&nbsp;<span id="stats-time-played"></span></li>
+        </ul>
+      </div>
+      <div class="interaction-display">
+        <!-- Logged in -->
+        <a id="add-to-friends">Add to friends list</a>
+        <a id="remove-from-friends">Remove from friend list</a>
+        <a id="invite-to-game">Invite to a game</a>
+        <a id="self-admirers">This is how others see you</a>
+        <!-- Not logged in -->
+        <a id="create-account" href="../create-account">Create a account</a>
+        <a id="log-in" href="../log-in">Log in</a>
+      </div>
+
+      <div class="el history-display">
+        <h1></h1>
+      </div>
+    </div>
+
+    <script src="/srf.js"></script>
+    <script src="/userPanel.js"></script>
+  </body>
+</html>

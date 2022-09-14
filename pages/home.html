@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" 
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Kanapka Gaming</title>
+    <meta name="description" content="Play multiplayer games with your friends. Connect four."/>
+    <meta name="keywords" content="Multiplayer, Online Games, Friends, Gaming, Kanapka">
+    <meta name="author" content="Maciej Szuter">
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="logo200.png">
+
+    <link rel="apple-touch-startup-image" href="logo500.png">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#f1c40f">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link href="13ProSplash.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+
+    <link rel="stylesheet" href="home.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    
+  </head>
+  <body>
+    <div id="mask-top-bar" class="hidden"></div>
+    <a href=""><img id="logo" src="logo.png" /></a>
+    <button id="navBtn"></button>
+    <div id="userBtn">
+      <p id="user-popup-name"></p>
+    </div>
+    <div id="overlayNav"></div>
+    <nav>
+      <div class="nav-content-scroll">
+        <div class="logo-box">
+          <img src="logoOnly.png" />
+          <h2>Kanapka<br />Studios</h2>
+        </div>
+        <div class="nav-lists">
+          <div class="nav-col">
+            <h4>Navigation</h4>
+            <ul id="navUl">
+              <li>
+                <div class="spinWhite">
+                  <a> Introduction</a>
+                  <a> Introduction</a>
+                </div>
+              </li>
+              <li>
+                <div class="spinWhite">
+                  <a> About</a>
+                  <a> About</a>
+                </div>
+              </li>
+              <li>
+                <div class="spinWhite">
+                  <a> Instructions</a>
+                  <a> Instructions</a>
+                </div>
+              </li>
+              <li>
+                <div id="navBtnHelp" class="spinWhite">
+                  <a> Help</a>
+                  <a> Help</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="nav-col">
+            <h4>Multiplayer</h4>
+            <ul id="navUl">
+              <li id="fir-li">
+                <div class="spinWhite" id="fir-link">
+                  <a><img src="svg/fir.svg" /> For in a Row</a>
+                  <a><img src="svg/fir.svg" /> For in a Row</a>
+                </div>
+                <div id="fir-create-form">
+                  <label>Enter your name</label>
+                  <input id="fir-admin-nick" />
+                  <label>Enter your guests name</label>
+                  <input id="fir-guest-nick" />
+                  <button id="createFirGameBtn">Create</button>
+                  <label>OR join an existing game</label>
+                  <input id="fir-room-string" />
+                  <button id="moveToFirGame">Join</button>
+                </div>
+              </li>
+              <li>
+                <div class="spinWhite">
+                  <a><img src="svg/shuter.svg" /> Shuter</a>
+                  <a><img src="svg/shuter.svg" /> Shuter</a>
+                </div>
+              </li>
+              <li>
+                <div class="spinWhite">
+                  <a><img src="svg/tuhak.svg" /> Tuhak</a>
+                  <a><img src="svg/tuhak.svg" /> Tuhak</a>
+                </div>
+              </li>
+              <li>
+                <div class="spinWhite">
+                  <a><img src="svg/wheelofluck.svg" /> Wheel of luck</a>
+                  <a><img src="svg/wheelofluck.svg" /> Wheel of luck</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="nav-col">
+            <h4>Singleplayer</h4>
+            <ul id="navUl">
+              <li>
+                <div class="spinWhite">
+                  <a> Spammer Sim</a>
+                  <a> Spammer Sim</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="spacer"></div>
+        <div class="mark">
+          <p>Maciej Szuter &copy; 2022</p>
+        </div>
+      </div>
+    </nav>
+    <div class="landing-page">
+      <div class="landing-page-center">
+        <h1>Play <span id="game-scroll"> </span> for free</h1>
+        <div class="landing-page-action">
+          <h2 id="actionText"></h2>
+          <button id="createAccountBtn">Create account</button>
+          <button id="loginBtn">Log in</button>
+          <button id="panelButton">Go to your panel</button>
+          <button id="logOutButton">Log out</button>
+        </div>
+      </div>
+    </div>
+    <section id="intro"></section>
+    <section id="about"></section>
+    <footer>
+      <div class="foot-cont">
+        <div class="foot-social c1600px">
+          <div class="foot-logo-box">
+            <img src="logoOnly.png" />
+            <h2>Kanapka<br />Studios</h2>
+          </div>
+          <ul class="foot-social-list">
+            <li>Twitter</li>
+            <li>Instagram</li>
+            <li>Mail</li>
+          </ul>
+        </div>
+        <div class="foot-useful-links c1600px">
+          <ul class="foot-link-column">
+            <h3>Accounts</h3>
+            <li>Create account</li>
+            <li>Update account</li>
+            <li>Delete account</li>
+            <li>Other account help</li>
+          </ul>
+          <ul class="foot-link-column">
+            <h3>Games</h3>
+            <li>Create game</li>
+            <li>Invite to game</li>
+            <li>Other game help</li>
+          </ul>
+          <ul class="foot-link-column">
+            <h3>Technical</h3>
+            <li id="clearCookiesBtn">Clear cookies</li>
+          </ul>
+          <ul class="foot-link-column">
+            <h3>Kanapka Studios</h3>
+            <li><a href="http://kanapka.eu">Studio Page</a></li>
+            <li><a href="https://sztorify.kanapka.eu">Sztorify</a></li>
+            <li><a href="https://ibpedia.kanapka.eu">IBpedia</a></li>
+          </ul>
+        </div>
+      </div>
+        <div class="foot-info">
+          <p>
+            Kanapka Studios &COPY; 2022
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- SCRIPT    SCRIPT    SCRIPT    SCRIPT    SCRIPT    SCRIPT -->
+    <script src="/srf.js" defer></script>
+    <script src="/home.js" defer></script>
+
+    <script>
+      const navBtnHelp = document.getElementById("navBtnHelp");
+      const mailNewsField = document.getElementById("mail-news");
+      const mailNewsButton = document.getElementById("sub-to-news");
+      const mailInvsField = document.getElementById("mail-invs");
+      const mailInvsButton = document.getElementById("sub-to-invs");
+      const mailResponseField = document.getElementById("mail-response-field");
+
+      // Main screen animation ----------------------------------------------------------------------
+
+      const games = [
+        ["a bunch of games", "background-color: red; color: white;"],
+        ["For in a Row", "background-color: orange; color: black;"],
+        ["Shuter", "background-color: yellow; color: black;"],
+        ["Tuhak", "background-color: green; color: white;"],
+        ["Wheel of luck", "background-color: blue; color: white;"],
+        ["Spammer Sim", "background-color: purple; color: white;"],
+      ];
+
+      let gi = 1;
+      document.getElementById("game-scroll").innerText = games[0][0];
+      document.getElementById(
+        "game-scroll"
+      ).style = `${games[0][1]} padding: 5px 10px; margin: 0 5px; transition: 0.4s;`;
+      setInterval(() => {
+        document.getElementById("game-scroll").innerText = games[gi][0];
+        document.getElementById(
+          "game-scroll"
+        ).style = `${games[gi][1]} padding: 5px 10px; margin: 0 5px; transition: 0.4s;`;
+        gi++;
+        if (gi > games.length - 1) {
+          gi = 0;
+        }
+      }, 2000);
+    </script>
+
+    <!-- ------------------- -->
+    <!-- BASIC FUNCTIONALITY -->
+    <!-- ------------------- -->
+
+    <script>
+      const body = document.querySelector("body");
+      const logo = document.getElementById("logo");
+      const navBtn = document.getElementById("navBtn");
+      const nav = document.querySelector("nav");
+      const navUl = document.querySelectorAll("#navUl");
+      const maskTopBar = document.getElementById("mask-top-bar");
+      const overlayNav = document.getElementById("overlayNav");
+      const footer = document.querySelector("footer");
+      const intro = document.getElementById("intro");
+
+      let navVisible = 0;
+      let logoBlocked = 0;
+
+      document.getElementById("loginBtn").addEventListener("click", () => {
+        window.location = "/log-in";
+      });
+      document
+        .getElementById("createAccountBtn")
+        .addEventListener("click", () => {
+          window.location = "/create-account";
+        });
+      panelButton.addEventListener("click", () => (window.location = "/panel"));
+      document.getElementById("userBtn").addEventListener(
+        "click",
+        () => (window.location = "/panel")
+      );
+
+      // NAVIGATION ------------------------------------------------------------------------
+
+      const toggleNav = () => {
+        if (navVisible) {
+          setTimeout(() => {
+            navUl.forEach((el) => (el.style.transform = "translateY(150px)"));
+          }, 500);
+          body.style.overflowY = "scroll";
+          if (!logoBlocked) {
+            logo.style.opacity = 1;
+          }
+          nav.style.right = "-100vw";
+          overlayNav.style.opacity = 0;
+          overlayNav.style.pointerEvents = "none";
+          navVisible = 0;
+        } else {
+          navUl.forEach((el, i) => {
+            const time = 120;
+            if (window.innerWidth > 1600) {
+              el.style.transition = "1s";
+              setTimeout(() => {
+                el.style.transform = "translateY(0px)";
+              }, i * time);
+            } else {
+              el.style.transition = "0s";
+
+              el.style.transform = "translateY(0px)";
+            }
+          });
+          body.style.overflowY = "hidden";
+          logo.style.opacity = 0;
+          nav.style.right = "0%";
+          overlayNav.style.opacity = 1;
+          overlayNav.style.pointerEvents = "auto";
+          navVisible = 1;
+        }
+      };
+
+      // NAV BAR ---------------------------------------------------------------------------
+
+      let scroll = 0;
+      setInterval(() => {
+        scroll = window.scrollY;
+        if (footer.getBoundingClientRect().y < 150) {
+          logoBlocked = 1;
+          logo.style.opacity = 0;
+          logo.style.pointerEvents = "none";
+        } else if (!navVisible) {
+          logo.style.opacity = 1;
+          logo.style.pointerEvents = "auto";
+        } else {
+          logoBlocked = 0;
+        }
+        const introData = intro.getBoundingClientRect();
+        if (introData.y < 100 && -introData.y > introData.height - 100) {
+          maskTopBar.classList.add("hidden");
+        } else {
+          maskTopBar.classList.remove("hidden");
+        }
+      }, 100);
+
+      
+      navBtn.addEventListener("click", toggleNav);
+      overlayNav.addEventListener("click", toggleNav);
+
+      // NAV LINKS
+
+      navBtnHelp.addEventListener("click", () => {
+        toggleNav();
+        console.log(footer.getBoundingClientRect().y);
+        window.scrollTo(0, footer.getBoundingClientRect().y);
+      });
+    </script>
+
+    <!-- --------------------- -->
+    <!-- SERVICE WORKER CONFIG -->
+    <!-- --------------------- -->
+
+    <script defer>
+      if("serviceWorker" in navigator){
+        navigator.serviceWorker.register("sw.js").then(reg => {
+          console.log('SW Registered')
+      }).catch(err => {
+        console.log('SW reg failed')
+      })
+      } else{
+        console.log(':(')
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create 4 in a Row Room</title>
+    <script src="/createFIR4.js" defer></script>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-image: radial-gradient(
+          at top left,
+          rgb(82, 82, 82),
+          rgb(44, 44, 44)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 100vh;
+        font-family: "M PLUS 1", sans-serif;
+      }
+      h1 {
+        font-size: 50px;
+        color: rgb(167, 167, 167);
+        margin-bottom: 20px;
+        text-align: center;
+        max-width: 1200px;
+      }
+      label {
+        color: rgb(167, 167, 167);
+        margin-top: 10px;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      input {
+        margin-top: 10px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border: none;
+        width: 300px;
+        height: 30px;
+        font-size: 26px;
+        color: white;
+      }
+      button {
+        color: rgb(167, 167, 167);
+        width: 200px;
+        height: 30px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border: none;
+        margin-top: 20px;
+      }
+      a {
+        color: white;
+      }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@200;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <form>
+      <h1 id="h1">Create a lobby</h1>
+      <label>Room name</label>
+      <input id="room" />
+      <label>Host name</label>
+      <input id="host" />
+      <label>Guest name</label>
+      <input id="guest" />
+    </form>
+    <button>Create</button>
+  </body>
+</html>

@@ -1,0 +1,364 @@
+::root {
+  --main-color: #f1c40f;
+  --dark-main-color: #ad8d0d;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Outfit", sans-serif;
+  overflow-x: hidden;
+  background-color: bisque;
+
+  transition: 0.3s;
+}
+
+.c1600px {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background-color: rgb(245, 245, 245);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--dark-main-color);
+}
+
+/* GRID   GRID   GRID   GRID   GRID */
+
+.grid {
+  margin-top: 30px;
+
+  /* NEW */
+  grid-template-columns: 380px 380px;
+
+  padding: 40px;
+  width: 100vw;
+  justify-content: center;
+
+  display: grid;
+  grid-template-areas: "profile stats" "interaction interaction" "history history";
+  grid-gap: 40px;
+}
+
+.profile-display {
+  grid-area: profile;
+  max-height: 425px;
+}
+.stats-display {
+  grid-area: stats;
+  max-height: 425px;
+}
+.search {
+  grid-area: search;
+  max-height: 800px;
+}
+.history-display {
+  grid-area: history;
+}
+.interaction-display {
+  grid-area: interaction;
+}
+
+/* PROFILE DISPLAY   PROFILE DISPLAY   PROFILE DISPLAY   PROFILE DISPLAY   PROFILE DISPLAY */
+
+.back {
+  position: absolute;
+  top: -30px;
+  left: -30px;
+
+  border-radius: 50%;
+  overflow: visible;
+
+  width: 80px;
+  height: 80px;
+}
+.back img {
+  width: 100%;
+  height: 100%;
+
+  transition: 0.2s;
+}
+.back img:hover {
+  transform: scale(0.9);
+}
+
+.profile-display {
+  position: relative;
+
+  padding: 40px;
+
+  max-width: 380px;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: white;
+}
+
+#profilePicture {
+  width: 200px;
+  height: 200px;
+
+  margin: 0 auto;
+
+  border-radius: 50%;
+  animation: loading 1s linear infinite alternate;
+}
+
+#userName {
+  margin-top: 30px;
+
+  font-size: 32px;
+  font-weight: 800;
+  color: black;
+  text-align: center;
+}
+
+#userStatus {
+  margin-top: 5px;
+
+  font-size: 20px;
+  font-weight: 300;
+  text-align: center;
+}
+
+/* STATS DISPLAY   STATS DISPLAY   STATS DISPLAY   STATS DISPLAY   STATS DISPLAY */
+
+.stats-display {
+  position: relative;
+
+  padding: 20px 30px 30px 30px;
+
+  max-width: 380px;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: white;
+}
+
+.stats-display-title {
+  text-align: left;
+  margin-bottom: 10px;
+
+  min-width: 270px;
+}
+
+.stats-display ul {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.stats-display li {
+  display: flex;
+
+  position: relative;
+
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-right: 10px;
+}
+
+.important-stat {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+#stats-rep {
+  color: #f1c40f;
+  font-weight: 700;
+}
+
+/* HISTORY DISPLAY   HISTORY DISPLAY   HISTORY DISPLAY   HISTORY DISPLAY   HISTORY DISPLAY */
+
+.history-display {
+  position: relative;
+
+  padding: 40px;
+
+  height: 500px;
+  text-align: left;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: white;
+}
+
+/* INTERACTION DISPLAY   INTERACTION DISPLAY   INTERACTION DISPLAY   INTERACTION DISPLAY   INTERACTION DISPLAY */
+
+.interaction-display {
+  position: relative;
+
+  text-align: left;
+
+  display: flex;
+  flex-direction: row;
+  min-height: 53px;
+
+  padding: 10px;
+  background-color: white;
+}
+
+#add-to-friends,
+#invite-to-game,
+#log-in,
+#self-admirers {
+  border: none;
+  background-color: #f1c40f;
+
+  text-decoration: none;
+
+  font-size: 20px;
+  font-weight: 600;
+  color: black;
+
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex: 3;
+
+  padding: 4px 10px;
+  cursor: pointer;
+
+  display: none;
+}
+#self-admirers {
+  cursor: auto;
+}
+#remove-from-friends,
+#create-account {
+  border: 2px solid #f1c40f;
+  background-color: transparent;
+
+  text-decoration: none;
+
+  font-size: 20px;
+  font-weight: 600;
+  color: black;
+
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex: 2;
+
+  padding: 2px 10px;
+  cursor: pointer;
+
+  margin-right: 10px;
+
+  display: none;
+}
+
+/* ANIMATIONS   ANIMATIONS   ANIMATIONS   ANIMATIONS   ANIMATIONS */
+
+@keyframes loading {
+  0% {
+    background-color: hsl(200, 20%, 70%);
+  }
+
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
+}
+
+/* MEDIA   MEDIA   MEDIA   MEDIA   MEDIA */
+
+@media (max-width: 900px) {
+  .grid {
+    margin-top: 0;
+
+    /* NEW */
+    grid-template-columns: 380px;
+
+    display: grid;
+    padding: 30px;
+
+    grid-template-areas:
+      "profile"
+      "interaction"
+      "stats"
+      "history"
+      "games";
+    grid-gap: 30px;
+  }
+  .el {
+    max-width: 380px;
+  }
+  .stats-display {
+    padding: 20px;
+  }
+  .back {
+    top: -20px;
+    left: -20px;
+    width: 60px;
+    height: 60px;
+  }
+  .important-stat {
+    font-size: 16px;
+  }
+
+  #add-to-friends,
+  #invite-to-game,
+  #log-in {
+    justify-content: center;
+    font-size: 12px;
+  }
+  #remove-from-friends,
+  #create-account {
+    font-size: 12px;
+  }
+
+  #invite-to-game {
+    padding-top: 11px;
+  }
+  #create-account {
+    padding-top: 6px;
+  }
+  #log-in {
+    padding-top: 8px;
+  }
+  #add-to-friends {
+    padding-top: 4px;
+    font-size: 18px;
+  }
+  #self-admirers {
+    padding-top: 4px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 400px) {
+  .grid {
+    padding: 20px;
+
+    /* NEW */
+    grid-template-columns: 100%;
+
+    grid-gap: 20px;
+  }
+  .back {
+    top: -15px;
+    left: -10px;
+  }
+}
